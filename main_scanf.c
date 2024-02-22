@@ -1,17 +1,29 @@
 #include <stdio.h>
+#include <stdlib.h>
 
-int main()
-{
-    //r, w, a, - text mode
-    //b, +
-    //b - binary => rb,wb,ab
-    //+ - if file does not exist - create that file
-    char user_input[256];
-    int flag;
-    scanf("%[^\n]%*c",user_input);
-    printf("%s ",user_input);
-    
-    //FILE *flpntr = fopen("user_input.txt","w+");
-    //fprintf(flpntr,"%s",text);
-    //fclose(flpntr);
+int main() {
+    // Declare variables
+    char input[1000]; // Assuming the input won't exceed 1000 characters
+    FILE *filePointer;
+
+    // Read input from the user
+    printf("Enter a string: ");
+    scanf("%999[^\n]", input); // Using scanf with %[^\n] to read a line until newline character
+
+    // Open file for writing
+    filePointer = fopen("user_input.o", "w");
+    if (filePointer == NULL) {
+        printf("Error opening file.\n");
+        return 1; // Exit program with error
+    }
+
+    // Write the input to the file
+    fprintf(filePointer, "%s", input);
+
+    // Close the file
+    fclose(filePointer);
+
+    printf("Input has been written to user_input.o successfully.\n");
+
+    return 0; // Exit program successfully
 }
